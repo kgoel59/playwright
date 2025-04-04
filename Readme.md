@@ -1,19 +1,33 @@
+# Test Automation with Playwright and Matplotlib
+
+## Running Tests
+
+To execute test cases using Playwright, run:
+```sh
 npx playwright test
-npx playwright show-report
-
-Test cases format = plot_(function_name).html
-Test cases folder = test_cases/
-
-
-Code for generating test_cases
-
 ```
+
+To view test reports:
+```sh
+npx playwright show-report
+```
+
+## Test Case Format
+
+- **Filename Format**: `plot_(function_name).html`
+- **Test Cases Folder**: `test_cases/`
+
+## Generating Test Cases
+
+The following Python script generates an interactive plot for a quadratic function (`y = x^2`) and saves it as an HTML file using `mpld3`:
+
+```python
 import matplotlib.pyplot as plt
 import mpld3
 import mpld3.plugins as plugins
 import numpy as np
 
-# Generate data for a quadratic function y = x^2
+# Generate data for the function y = x^2
 x = np.arange(-10, 11)  # More points for a smoother curve
 y = x ** 2
 
@@ -34,5 +48,14 @@ tooltip_plugin = plugins.PointLabelTooltip(ax.lines[0], labels=tooltips)
 plugins.connect(fig, tooltip_plugin)
 
 # Save the plot to an HTML file using mpld3
-mpld3.save_html(fig, 'plot_(x^2).html')
+mpld3.save_html(fig, 'plot_x_squared.html')
 ```
+
+## Notes
+- This script generates an interactive HTML plot with tooltips showing the (x, y) values of the points.
+- The output file is stored in the test cases directory (`test_cases/`).
+- Modify the script to generate plots for different functions as needed.
+
+---
+For further details, refer to the Playwright and Matplotlib documentation.
+
